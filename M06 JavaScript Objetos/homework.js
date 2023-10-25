@@ -9,7 +9,7 @@ function crearGato(nombre, edad) {
    // Tu código:
 
 
-   var   // con let no me deja definir el objeto
+   var   
       objeto_gato = {
          nombre: nombre,
          edad: edad,
@@ -21,17 +21,33 @@ function crearGato(nombre, edad) {
    return objeto_gato
 }
 
+// console.log(objeto_gato);
+
 function nuevoUsuario(nombre, email, password) {
    // Debes crear un nuevo objeto.
    // Este debe tener las propiedades: "nombre", "email" y "password" con sus respectivos valores.
    // Retornar el objeto.
    // Tu código:
 
-   var   // con let no me deja definir el objeto
+   // var   
+   //    usuario = {
+   //       nombre: nombre,
+   //       email: email,
+   //       password: password,
+   //    }
+
+   // return usuario
+
+   // tambien de acuerdo a la esma6 o actualizaciones de javascript
+   // cuando el valor es igual a la key o propiedad se pone una sola vez
+   // let: tiene ambito dentro de la funcion
+   // var: tiene ambito en todo el archivo donde esta definido
+
+   let   
       usuario = {
-         nombre: nombre,
-         email: email,
-         password: password,
+         nombre,
+         email,
+         password
       }
 
    return usuario
@@ -83,7 +99,12 @@ function tieneEmail(objetoUsuario) {
    // En ese caso retornar true. Caso contrario, false.
    // Tu código:
 
-   return !!objetoUsuario.email
+   // OK
+   return !!objetoUsuario.email  // aqui devuelve true
+
+   // Y AQUI DEVUELVE EL VALOR DE LA PROPIEDAD "email" POR ESO NF.
+   // return objetoUsuario.email // NF
+   // return objetoUsuario["email"] // NF
 
 // NOT FOUND
    // return objetoUsuario.hasOwnProperty('email')
@@ -95,6 +116,8 @@ function tienePropiedad(objeto, propiedad) {
    // Tu código:
 
    return objeto.hasOwnProperty(propiedad)
+
+   // return objeto[propiedad]   // NF
 }
 
 function verificarPassword(objetoUsuario, password) {
@@ -102,7 +125,10 @@ function verificarPassword(objetoUsuario, password) {
    // En ese caso retornar true. Caso contrario, false.
    // Tu código:
 
-   return objetoUsuario['password'] === password
+   // AMBOS OK
+   // return objetoUsuario['password'] === password   
+
+   return objetoUsuario.password === password   
 
 // not found solo a medias
    // return objetoUsuario.hasOwnProperty('password') === password 
@@ -179,7 +205,8 @@ function agregarMetodoCalculoDescuento(objetoProducto) {
    // Tu código:
 
    objetoProducto.calcularPrecioDescuento = function () {
-      return objetoProducto.precio - objetoProducto.precio * objetoProducto.porcentajeDeDescuento
+      /* return objetoProducto.precio - objetoProducto.precio * objetoProducto.porcentajeDeDescuento */
+      return this.precio - this.precio * this.porcentajeDeDescuento
    }
    return objetoProducto
 }

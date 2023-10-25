@@ -7,12 +7,19 @@ function devolverPrimerElemento(array) {
   return array.shift();
 }
 
-function devolverUltimoElemento(array) {
+// var rta = devolverPrimerElemento([2,5,47]);
+// console.log(rta);
+
+ function devolverUltimoElemento(array) {
   // Retornar el último elemento del arreglo recibido por parámetro.
   // Tu código:
   // return array[array.length - 1]
-  return array.pop();
-}
+  // return array.pop();
+  return array.at(-1)
+ }
+
+// USANDO QUOKKA
+//  console.log(devolverUltimoElemento([1,2, "mauri", "goat"]))
 
 function obtenerLargoDelArray(array) {
   // Retornar la longitud del arreglo recibido por parámetro.
@@ -24,11 +31,17 @@ function incrementarPorUno(array) {
   // El arreglo recibido por parámetro contiene números.
   // Retornar un arreglo con los elementos incrementados en +1.
   // Tu código:
-  var arrayMasUno = array.map((num) => {
-    return num + 1;
-  });
-  return arrayMasUno;
+
+  // var arrayMasUno = array.map((num) => {
+  //   return num + 1;
+  // });
+  // return arrayMasUno;
+
+  // O EN UNA SOLA LINEA...
+  return array.map((elem) => elem + 1)
 }
+
+// console.log(incrementarPorUno([2,4,6,8]))
 
 function agregarItemAlFinalDelArray(array, elemento) {
   // Agrega el "elemento" al final del arreglo recibido.
@@ -36,8 +49,11 @@ function agregarItemAlFinalDelArray(array, elemento) {
   // Tu código:
   // return array.push(elemento); not found
   array.push(elemento);
+  console.log(array);
   return array;
 }
+
+// console.log(agregarItemAlFinalDelArray([2,4,8], 6))
 
 function agregarItemAlComienzoDelArray(array, elemento) {
   // Agrega el "elemento" al comienzo del arreglo recibido.
@@ -98,45 +114,62 @@ function agregarNumeros(arrayOfNums) {
   // El parámetro "arrayOfNums" debe ser un arreglo de números.
   // Suma todos los elementos y retorna el resultado.
   // Tu código:
-  var suma = 0;
-  arrayOfNums.forEach((element) => {
-    suma = suma + element;
-  });
-  return suma;
+  // var suma = 0;
+  // arrayOfNums.forEach((element) => {
+  //   suma = suma + element;
+  // });
+  // return suma;
+
+  // otra forma con reduce (luego hay otro mas avanzado...)
+  return arrayOfNums.reduce(function (pelem, selem) {
+    return pelem + selem
+  })
 }
+
+// console.log(agregarNumeros([2,4,8])) // 14
 
 function promedioResultadosTest(resultadosTest) {
   // El parámetro "resultadosTest" es un arreglo de números.
   // Itera (en un bucle) los elementos del arreglo y devuelve el promedio de las notas.
   // Tu código:
-  let suma = 0;
+  // let suma = 0;
 
-  resultadosTest.forEach((element) => {
-    suma = suma + element;
-  });
+  // resultadosTest.forEach((element) => {
+  //   suma = suma + element;
+  // });
 
-  return (promedio = suma / resultadosTest.length);
+  // // return (promedio = suma / resultadosTest.length);
+  // return suma / resultadosTest.length;
 
   // var suma = 0;
   // for (const iterator of resultadosTest) {
   //    suma = suma + iterator
   // }
   // return promedio = suma / resultadosTest.length
+
+  return agregarNumeros(resultadosTest) / resultadosTest.length
 }
 
 function numeroMasGrande(arrayOfNums) {
   // El parámetro "arrayOfNums" es un arreglo de números.
   // Retornar el número más grande.
   // Tu código:
-  var masGrande = arrayOfNums[0];
+  // var masGrande = arrayOfNums[0];
 
-  for (let i = 1; i < arrayOfNums.length; i++) {
-    if (arrayOfNums[i] > masGrande) {
-      masGrande = arrayOfNums[i];
-    }
-  }
-  return masGrande;
+  // for (let i = 1; i < arrayOfNums.length; i++) {
+  //   if (arrayOfNums[i] > masGrande) {
+  //     masGrande = arrayOfNums[i];
+  //   }
+  // }
+  // return masGrande;
+
+// otra forma: los tres puntos (...) o sprey to preytor, lo que hace es desempaquetar el array 
+// o quitar los corchetes del mismo tambien llamado destructury, porque sino no lo toma la funcion Math.max()
+// es como enviar el array elemento por elemento o individualemnte.
+  return Math.max(... arrayOfNums)
 }
+
+// console.log(numeroMasGrande([5,8,3]))
 
 function multiplicarArgumentos() {
   // Usa la palabra clave `arguments` para multiplicar todos los argumentos y devolver el producto.
@@ -144,12 +177,18 @@ function multiplicarArgumentos() {
   // [PISTA]: "arguments" es un arreglo.
   // Tu código:
 
-  let cant_args = arguments.length,
+  console.log(arguments);
+
+  let 
+    cant_args = arguments.length,
     producto = 1;
+
+  // console.log(cant_args);  // 4
 
   if (cant_args === 0) {
     return 0;
-  } else if (cant_args === 1) {
+  } 
+  else if (cant_args === 1) {
     return arguments[0];
   }
 
@@ -164,7 +203,7 @@ function multiplicarArgumentos() {
   //    cerounargumento = false,
   //    producto = 1;
 
-  // if (multiplicarArgumentos.length === 0) {
+  // if (multiplicarArgumentos.length === 0) {  // porque aqui estas mencionando al nombre de la funcion que no es un array
   //    // return 0
   //    cerounargumento = true
   // }
@@ -187,6 +226,8 @@ function multiplicarArgumentos() {
   // }
 }
 
+// console.log(multiplicarArgumentos(21,32,43,56));
+
 function cuentoElementos(array) {
   // Desarrolla una función que retorne la cantidad de elementos del arreglo cuyo valor sea mayor que 18.
   // Tu código:
@@ -196,11 +237,14 @@ function cuentoElementos(array) {
   array.forEach((element) => {
     if (element > 18) {
       cant = cant + 1;
+      // cant++;
     }
   });
 
   return cant;
 }
+
+// console.log(cuentoElementos([3,47,15,51]));
 
 function diaDeLaSemana(numeroDeDia) {
   // Supongamos que los días de la semana se codifican como 1 = Domingo, 2 = Lunes y así sucesivamente.
@@ -218,30 +262,43 @@ function empiezaConNueve(num) {
   // Esta función recibe por parámetro un número.
   // Debe retornar true si el entero inicia con 9 y false en otro caso.
   // Tu código:
-  var string = num.toString(); // ,
 
-  // array = string.split('');
+  // var string = num.toString(); // ,
 
-  // return array[0] === '9'
+  // // array = string.split('');
 
-  return string[0] === "9";
+  // // return array[0] === '9'
+
+  // return string[0] === "9";
+
+  // o bien mas reducido seria:
+  return num.toString()[0] === "9"
 }
 
-function todosIguales(array) {
+ function todosIguales(array) {
   // Si todos los elementos del arreglo son iguales, retornar true?
   // Caso contrario retornar false.
   // Tu código:
 
-  let iguales = true;
+  // let iguales = true;
 
-  array.forEach((element) => {
-    if (element !== array[1]) {
-      iguales = false;
-    }
-  });
+  // array.forEach((element) => {
+  //   if (element !== array[1]) {
+  //     iguales = false;
+  //   }
+  // });
 
-  return iguales; // ok
+  // return iguales; // ok
 
+  // o bien 
+  var pointer = array[0]
+  
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] !== pointer) return false
+  }
+  return true
+
+  // OTRA FORMA...
   // let iguales = false;
   // iguales = array.every((num) => {num === array[1]});
   // return iguales # not found
@@ -251,6 +308,7 @@ function todosIguales(array) {
   // })
 
   // return array.every((num) => {num === array[1]}) # not found
+
 }
 
 function mesesDelAño(array) {
@@ -286,6 +344,7 @@ function tablaDelSeis() {
     // document.write(6 * i);
     // console.log(6 * i);
     tablaDelSeis[i] = 6 * i;
+    // tablaDelSeis.push(6 * i) // otra forma de ejecutar la linea anterior
   }
 
   return tablaDelSeis;
@@ -296,19 +355,34 @@ function mayorACien(array) {
   // Recorrerlo y retornar un arreglo con todos los valores mayores a 100 (no incluye el 100).
   // Tu código:
 
-  let newarray = [];
+  // let newarray = [];
 
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] > 100) {
-      newarray.push(array[i]);
-    }
-  }
-  return newarray;
+  // for (let i = 0; i < array.length; i++) {
+  //   if (array[i] > 100) {
+  //     newarray.push(array[i]);
+  //   }
+  // }
+  // return newarray;
 
-  //   NOT FOUND  - REVISAR PORQUE
-  // let nuevoarray = array.map( (nro) => { if (nro > 100) return nro});
+  // o bien ok
+  // return array.filter(function (elem) {
+  //   return elem > 100 // retorna el elem en lugar del true, porque filter mapea y devuelve un nuevo array.
+  // })
 
+  // CON MAP - NOT FOUND  - REVISAR PORQUE
+  // let nuevoarray = array.map((nro) => { if (nro > 100) return nro});
+  // let nuevoarray = array.map((nro) => { return nro > 100 });
+  // let nuevoarray = array.map((nro) => { nro > 100 });
   // return nuevoarray
+
+  // O BIEN con map
+  // return array.map((nro) => { nro > 100 });  // not found
+  // return array.map((nro) => { return nro > 100 });  // not found
+  // return array.map((nro) => { if (nro > 100) return nro }); // not found
+
+  // o bien con filter
+  // return array.filter((nro) => { nro > 100 });  // not found
+  return array.filter((nro) => { return nro > 100 });  // OK OK 
 }
 
 /* ----------------------------------------------------------------------------------
